@@ -32,11 +32,14 @@ class MarketplaceScreen extends StatelessWidget {
         gridDelegate:
             const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemBuilder: ((context, index) {
-          return GestureDetector(
-            onTap: () => Navigator.of(context).pushNamed(
-                ProductDetailScreen.route,
-                arguments: loadedProducts[index].id),
-            child: ProductWidget(loadedProducts[index]),
+          return ChangeNotifierProvider.value(
+            value: loadedProducts[index],
+            child: GestureDetector(
+              onTap: () => Navigator.of(context).pushNamed(
+                  ProductDetailScreen.route,
+                  arguments: loadedProducts[index].id),
+              child: ProductWidget(loadedProducts[index]),
+            ),
           );
         }),
       ),

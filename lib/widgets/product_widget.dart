@@ -19,9 +19,9 @@ class ProductWidget extends StatelessWidget {
           child: Image.network(product.imageUrl, fit: BoxFit.cover),
           footer: GridTileBar(
               backgroundColor: Colors.black54,
-              leading: Consumer<ProductsProvider>(
-                builder: (context, provider, child) => IconButton(
-                  icon: provider.getFavoriteStatus(product.id)
+              leading: Consumer<Product>(
+                builder: (context, prod, child) => IconButton(
+                  icon: prod.isFavorite
                       ? const Icon(
                           Icons.favorite,
                           color: Colors.yellow,
@@ -30,9 +30,7 @@ class ProductWidget extends StatelessWidget {
                           Icons.favorite,
                           color: Colors.white,
                         ),
-                  onPressed: () =>
-                      Provider.of<ProductsProvider>(context, listen: false)
-                          .switchFavoriteStatus(product.id),
+                  onPressed: () => prod.switchFavoriteStatus(),
                 ),
               ),
               trailing: IconButton(
