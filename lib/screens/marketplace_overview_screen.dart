@@ -38,7 +38,7 @@ class MarketplaceScreen extends StatelessWidget {
               onTap: () => Navigator.of(context).pushNamed(
                   ProductDetailScreen.route,
                   arguments: loadedProducts[index].id),
-              child: ProductWidget(loadedProducts[index]),
+              child: ProductWidget(),
             ),
           );
         }),

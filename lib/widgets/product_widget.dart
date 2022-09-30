@@ -5,12 +5,9 @@ import '../models/product.dart';
 import '../providers/products_provider.dart';
 
 class ProductWidget extends StatelessWidget {
-  Product product;
-
-  ProductWidget(this.product, {super.key});
-
   @override
   Widget build(BuildContext context) {
+    final product = Provider.of<Product>(context, listen: false);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ClipRRect(
