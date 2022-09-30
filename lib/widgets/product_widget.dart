@@ -11,12 +11,6 @@ class ProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color col;
-    if (Provider.of<ProductsProvider>(context).getFavoriteStatus(product.id)) {
-      col = Colors.yellow;
-    } else {
-      col = Colors.white;
-    }
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ClipRRect(
@@ -25,14 +19,21 @@ class ProductWidget extends StatelessWidget {
           child: Image.network(product.imageUrl, fit: BoxFit.cover),
           footer: GridTileBar(
               backgroundColor: Colors.black54,
-              leading: IconButton(
-                icon: Icon(
-                  Icons.favorite,
-                  color: col,
+              leading: Consumer<ProductsProvider>(
+                builder: (context, provider, child) => IconButton(
+                  icon: provider.getFavoriteStatus(product.id)
+                      ? const Icon(
+                          Icons.favorite,
+                          color: Colors.yellow,
+                        )
+                      : const Icon(
+                          Icons.favorite,
+                          color: Colors.white,
+                        ),
+                  onPressed: () =>
+                      Provider.of<ProductsProvider>(context, listen: false)
+                          .switchFavoriteStatus(product.id),
                 ),
-                onPressed: () =>
-                    Provider.of<ProductsProvider>(context, listen: false)
-                        .switchFavoriteStatus(product.id),
               ),
               trailing: IconButton(
                 icon: Icon(Icons.shopping_cart),
