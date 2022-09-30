@@ -11,6 +11,7 @@ class ProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('product widget rebuild ' + product.id);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ClipRRect(
